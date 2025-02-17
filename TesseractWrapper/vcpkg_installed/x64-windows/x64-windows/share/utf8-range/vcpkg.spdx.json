@@ -1,0 +1,132 @@
+{
+  "$schema": "https://raw.githubusercontent.com/spdx/spdx-spec/v2.2.1/schemas/spdx-schema.json",
+  "spdxVersion": "SPDX-2.2",
+  "dataLicense": "CC0-1.0",
+  "SPDXID": "SPDXRef-DOCUMENT",
+  "documentNamespace": "https://spdx.org/spdxdocs/utf8-range-x64-windows-5.29.3-47447503-a4e1-412d-a34f-dae512d7c9c1",
+  "name": "utf8-range:x64-windows@5.29.3 879b9f53232dece5bc17ff2042babc2c5174dd1368cf52314c72c4f8044747a9",
+  "creationInfo": {
+    "creators": [
+      "Tool: vcpkg-2025-02-11-bec4296bf5289dc9ce83b4f5095943e44162f9c2"
+    ],
+    "created": "2025-02-16T15:02:43Z"
+  },
+  "relationships": [
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "GENERATES",
+      "relatedSpdxElement": "SPDXRef-binary"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-0"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-1"
+    },
+    {
+      "spdxElementId": "SPDXRef-port",
+      "relationshipType": "CONTAINS",
+      "relatedSpdxElement": "SPDXRef-file-2"
+    },
+    {
+      "spdxElementId": "SPDXRef-binary",
+      "relationshipType": "GENERATED_FROM",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-0",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-1",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    },
+    {
+      "spdxElementId": "SPDXRef-file-2",
+      "relationshipType": "CONTAINED_BY",
+      "relatedSpdxElement": "SPDXRef-port"
+    }
+  ],
+  "packages": [
+    {
+      "name": "utf8-range",
+      "SPDXID": "SPDXRef-port",
+      "versionInfo": "5.29.3",
+      "downloadLocation": "git+https://github.com/Microsoft/vcpkg#ports/utf8-range",
+      "homepage": "https://github.com/protocolbuffers/protobuf",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "description": "Fast UTF-8 validation with Range algorithm (NEON+SSE4+AVX2)",
+      "comment": "This is the port (recipe) consumed by vcpkg."
+    },
+    {
+      "name": "utf8-range:x64-windows",
+      "SPDXID": "SPDXRef-binary",
+      "versionInfo": "879b9f53232dece5bc17ff2042babc2c5174dd1368cf52314c72c4f8044747a9",
+      "downloadLocation": "NONE",
+      "licenseConcluded": "MIT",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "comment": "This is a binary package built by vcpkg."
+    },
+    {
+      "SPDXID": "SPDXRef-resource-0",
+      "name": "protocolbuffers/protobuf",
+      "downloadLocation": "git+https://github.com/protocolbuffers/protobuf@v5.29.3",
+      "licenseConcluded": "NOASSERTION",
+      "licenseDeclared": "NOASSERTION",
+      "copyrightText": "NOASSERTION",
+      "checksums": [
+        {
+          "algorithm": "SHA512",
+          "checksumValue": "32a9ae3de113b8c94e2aed21ad8f58e5ed4419a6d4078e51f614f0fabbf3bfe6c4affc62c2c1326e030a54df0fdcc47bb715b45022191a363f17680ec651b68e"
+        }
+      ]
+    }
+  ],
+  "files": [
+    {
+      "fileName": "./C:/Users/chaus/source/repos/vcpkg/ports/utf8-range/fix-cmake.patch",
+      "SPDXID": "SPDXRef-file-0",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "4616671728b9bb0726da0818652339c06a271823a83a6188b5f775bb6f61ce03"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/Users/chaus/source/repos/vcpkg/ports/utf8-range/portfile.cmake",
+      "SPDXID": "SPDXRef-file-1",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "b19d19eac7bfc36c519cca491959a5bee95ea0e3f3690fe335ae16d13c8fef99"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    },
+    {
+      "fileName": "./C:/Users/chaus/source/repos/vcpkg/ports/utf8-range/vcpkg.json",
+      "SPDXID": "SPDXRef-file-2",
+      "checksums": [
+        {
+          "algorithm": "SHA256",
+          "checksumValue": "eb18742580f6714fba2b892648b68023102605e9bed1b91e9e47053987bcc8ed"
+        }
+      ],
+      "licenseConcluded": "NOASSERTION",
+      "copyrightText": "NOASSERTION"
+    }
+  ]
+}
