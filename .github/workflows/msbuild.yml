@@ -35,7 +35,7 @@ jobs:
 
     - name: Restore vcpkg packages
       working-directory: ${{env.GITHUB_WORKSPACE}}
-      run: ${{ github.workspace }}/vcpkg/vcpkg install
+      run: ${{ github.workspace }}/TesseractWrapper/vcpkg/vcpkg install
 
     - name: Build
       working-directory: ${{env.GITHUB_WORKSPACE}}
