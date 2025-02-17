@@ -5,13 +5,22 @@
 #include <leptonica/allheaders.h>
 #include <tesseract/renderer.h>
 #include <string>
-#include <opencv2/opencv.hpp>
+#include <opencv2/core.hpp>
+#include <opencv2/imgproc.hpp>
+#include <opencv2/imgcodecs.hpp>
 
 using namespace System;
 using namespace System::Runtime::InteropServices;
 
 namespace TesseractWrapper
 {
+    static std::string GlobalStringToString(String^ inputString) {
+        IntPtr ptrString = Marshal::StringToHGlobalAnsi(inputString);
+        std::string outputString = static_cast<const char*>(ptrString.ToPointer());
+        Marshal::FreeHGlobal(ptrString);
+        return outputString;
+    }
+
     String^ OCRProcessor::ExtractText(String^ imagePath, String^ lang, String^ tessdataPath, int psmMode, bool withPreTreatment)
     {
         std::string imagePathCpp = GlobalStringToString(imagePath);
@@ -28,9 +37,12 @@ namespace TesseractWrapper
 
         Pix* image;
         if (withPreTreatment) {
-            image = PreprocessImage(imagePathCpp.c_str());
+            image = PreprocessImage(imagePath);
         }
-        else { pixRead(imagePathCpp.c_str()); }
+        else 
+        { 
+            image = pixRead(imagePathCpp.c_str());
+        }
 
         if (!image)
         {
@@ -75,9 +87,9 @@ namespace TesseractWrapper
         return orientation[detectedOr];
     }
 
-    Pix* PreprocessImage(std::string imagePath)
+    Pix* OCRProcessor::PreprocessImage(String^ imagePath)
     {
-        cv::Mat img = cv::imread(imagePath, cv::IMREAD_GRAYSCALE);
+        cv::Mat img = cv::imread(GlobalStringToString(imagePath), cv::IMREAD_GRAYSCALE);
         cv::threshold(img, img, 0, 255, cv::THRESH_BINARY | cv::THRESH_OTSU);
 
         Pix* processedImg = pixCreate(img.cols, img.rows, 8);
@@ -92,14 +104,7 @@ namespace TesseractWrapper
         return processedImg;
     }
 
-    std::string GlobalStringToString(String^ inputString) {
-        IntPtr ptrString = Marshal::StringToHGlobalAnsi(inputString);
-        std::string outputString = static_cast<const char*>(ptrString.ToPointer());
-        Marshal::FreeHGlobal(ptrString);
-        return outputString;
-    }
-
-    bool OCRProcessor::GenerateOCRPDF(String^ imagePath, String^ outputPdfPath, String^ language, String^ tessdataPath)
+    bool OCRProcessor::GenerateOCRPDF(String^ imagePath, String^ outputPdfPath, String^ language, String^ tessdataPath, int psmMode, bool withPreTreatment)
     {
         std::string imagePathCpp = GlobalStringToString(imagePath);
         std::string outputPdfPathCpp = GlobalStringToString(outputPdfPath);
@@ -112,10 +117,20 @@ namespace TesseractWrapper
             return false;
         }
 
-        Pix* image = pixRead(imagePathCpp.c_str());
+        ocr.SetPageSegMode((tesseract::PageSegMode)psmMode);
+
+        Pix* image;
+        if (withPreTreatment) {
+            image = PreprocessImage(imagePath);
+        }
+        else
+        {
+            image = pixRead(imagePathCpp.c_str());
+        }
+
         if (!image)
         {
-            return false;
+            return "Erreur : Impossible de charger l'image.";
         }
 
         std::string pdfOutputBase = outputPdfPathCpp.substr(0, outputPdfPathCpp.find_last_of('.'));
